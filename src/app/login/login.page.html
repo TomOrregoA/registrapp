@@ -1,0 +1,35 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <!-- <ion-buttons slot="start">
+      <ion-button color="primary" [routerLink]="['/home']">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+        <ion-button>Registrarse</ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="header">
+    <img src="../assets/img/logo.png">
+    <h1>RegistrAPP</h1>
+    <h3>Inicio de sesión</h3>
+
+  </div>
+
+  <form id="form" [formGroup]="formularioLogin">
+    <ion-item>
+      <ion-label position="floating">Nombre de Usuario</ion-label>
+      <ion-input formControlName="nombre"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input formControlName="password" type="password"></ion-input>
+    </ion-item>
+    <p class="ion-text-end recoveryLink" color="secondary" [routerLink]="['/password-reset']">¿Ha olvidado su contraseña?</p>
+    <ion-button expand="block" shape="round" class="btn-login" (click)="ingresar()">Ingresar</ion-button>
+  </form>
+
+</ion-content>
