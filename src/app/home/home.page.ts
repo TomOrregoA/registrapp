@@ -10,10 +10,16 @@ export class HomePage implements OnInit {
 
   username: any;
   sub: any;
+  isDisplayImage = false;
 
   constructor(
     private activatedRoute: ActivatedRoute
   ) { }
+  ;
+
+  displayImage() {
+     this.isDisplayImage = true;
+  }
 
   ngOnInit() {
     this.sub = this.activatedRoute.params.subscribe(params => {

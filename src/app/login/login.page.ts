@@ -50,31 +50,3 @@ export class LoginPage implements OnInit {
   }
 }
 
-
-/* this.usuarios.forEach(async (usuario, i) => {
-  if (usuario.nombre === f.nombre) {
-    if (usuario.password === f.password) {
-      this.auth = true;
-      console.log('acceso autorizado');
-      this.router.navigate(['/home/' + usuario.id]);
-    } else {
-      const alert = await this.alertController.create({
-        header: 'Acceso denegado',
-        message: 'Los datos ingresados son incorrectos.',
-        buttons: ['Aceptar']
-      });
-      await alert.present();
-      return;
-    }
-  }
-  else if (this.usuarios.length - 1 === i && usuario.nombre !== f.nombre && this.auth === false) {
-  const alert = await this.alertController.create({
-    header: 'Acceso denegado',
-    message: 'Los datos ingresados son incorrectos.',
-    buttons: ['Aceptar']
-  });
-  await alert.present();
-  return;
-}
-}); */
-
