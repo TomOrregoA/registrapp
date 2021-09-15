@@ -16,8 +16,8 @@ const routes: Routes = [
     loadChildren: () => import('./password-reset/password-reset.module').then( m => m.PasswordResetPageModule)
   },
   {
-    path: 'logged/:usuario',
-    loadChildren: () => import('./logged/logged.module').then( m => m.LoggedPageModule)
+    path: 'home/:username',
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
 ];
 

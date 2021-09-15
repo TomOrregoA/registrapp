@@ -1,0 +1,17 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button color="danger" [routerLink]="['/login']">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="content" class="ion-text-center">
+    <h1>Bienvenido <b class="username">{{this.username}}</b></h1>
+    <img src="../assets/img/qr.png" alt="">
+    <p>Escanea este código QR para quedar presente en la clase.</p>
+  </div>
+</ion-content>

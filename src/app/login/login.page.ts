@@ -6,6 +6,7 @@ import {
   Validators,
   FormBuilder
 } from '@angular/forms';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -16,14 +17,64 @@ export class LoginPage implements OnInit {
 
   formularioLogin: FormGroup;
 
-  constructor(private router: Router, private fb: FormBuilder) {
-      this.formularioLogin = this.fb.group({
-        nombre: new FormControl('',Validators.required),
-        password: new FormControl('',Validators.required),
-      });
+  auth = false;
+
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private alertController: AlertController) {
+    this.formularioLogin = this.fb.group({
+      nombre: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
+    });
   }
 
   ngOnInit() {
   }
 
+  async ingresar() {
+    const f = this.formularioLogin.value;
+    if (this.formularioLogin.invalid) {
+      const alert = await this.alertController.create({
+        header: 'Datos incompletos',
+        message: 'Tienes que llenar todos los datos.',
+        buttons: ['Aceptar']
+      });
+
+      await alert.present();
+      return;
+    }
+    else {
+      this.router.navigate(['/home/'+ f.nombre]);
+    }
+  }
 }
+
+
+/* this.usuarios.forEach(async (usuario, i) => {
+  if (usuario.nombre === f.nombre) {
+    if (usuario.password === f.password) {
+      this.auth = true;
+      console.log('acceso autorizado');
+      this.router.navigate(['/home/' + usuario.id]);
+    } else {
+      const alert = await this.alertController.create({
+        header: 'Acceso denegado',
+        message: 'Los datos ingresados son incorrectos.',
+        buttons: ['Aceptar']
+      });
+      await alert.present();
+      return;
+    }
+  }
+  else if (this.usuarios.length - 1 === i && usuario.nombre !== f.nombre && this.auth === false) {
+  const alert = await this.alertController.create({
+    header: 'Acceso denegado',
+    message: 'Los datos ingresados son incorrectos.',
+    buttons: ['Aceptar']
+  });
+  await alert.present();
+  return;
+}
+}); */
+

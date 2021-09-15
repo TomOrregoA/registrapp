@@ -9,34 +9,20 @@ ion-toolbar {
 ion-content {
   --background: #f5f5f3;
 
-  #header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  #content {
+    margin-top: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+
+    .username {
+      text-transform: uppercase;
+    }
 
     h1 {
       font-weight: 700;
       font-size: 26px;
       color: #333333;
     }
-    h3 {
-      font-weight: 600;
-      font-size: 18px;
-      color: #666666;
-    }
-
-    img {
-      width: 125px;
-      height: 125px;
-      border-radius: 50%;
-      border: 8px solid white;
-    }
-  }
-
-  #form-login {
-    margin-top: 15px;
-    padding-left: 30px;
-    padding-right: 30px;
 
     .btn-login {
       box-shadow: 1px 8px 8px 0px rgba(0, 0, 0, 0.05);

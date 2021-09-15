@@ -1,13 +1,5 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <!-- <ion-buttons slot="start">
-      <ion-button color="primary" [routerLink]="['/home']">
-        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-buttons slot="end">
-        <ion-button>Registrarse</ion-button>
-    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
@@ -19,7 +11,7 @@
 
   </div>
 
-  <form id="form" [formGroup]="formularioLogin">
+  <form id="form-login" [formGroup]="formularioLogin">
     <ion-item>
       <ion-label position="floating">Nombre de Usuario</ion-label>
       <ion-input formControlName="nombre"></ion-input>
