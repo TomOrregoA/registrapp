@@ -8,11 +8,15 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content fullscreen>
   <div id="content" class="ion-text-center">
     <h1>Bienvenido <b class="username">{{this.username}}</b></h1>
     <ion-button expand="block" shape="round" class="btn-login" (click)="displayImage()">Generar QR</ion-button>
-    <img *ngIf="isDisplayImage" src="../assets/img/qr.png" alt="">
-    <p>Comparte este código QR para que los alumnos lo escaneen.</p>
   </div>
+  <ion-card *ngIf="isDisplayImage">
+    <img src="../assets/img/qr.png" alt="">
+    <ion-card-content>
+      Comparte este código QR para que los alumnos lo escaneen.
+    </ion-card-content>
+  </ion-card>
 </ion-content>
