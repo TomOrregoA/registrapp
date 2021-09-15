@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,22 +9,20 @@ import { ActivatedRoute } from '@angular/router';
 export class HomePage implements OnInit {
 
   username: any;
-  sub: any;
   isDisplayImage = false;
 
-  constructor(
-    private activatedRoute: ActivatedRoute
-  ) { }
-  ;
-
-  displayImage() {
-     this.isDisplayImage = true;
-  }
+  constructor(private activeroute: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
-    this.sub = this.activatedRoute.params.subscribe(params => {
-      this.username = params.username;
+    this.activeroute.queryParams.subscribe(params => {
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.username = this.router.getCurrentNavigation().extras.state.user.nombre;
+      } else { this.router.navigate(["/login"]) }
     });
+  }
+
+  displayImage() {
+    this.isDisplayImage = true;
   }
 
 }

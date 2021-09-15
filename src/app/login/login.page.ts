@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import {
   FormGroup,
   FormControl,
@@ -16,24 +16,23 @@ import { AlertController } from '@ionic/angular';
 export class LoginPage implements OnInit {
 
   formularioLogin: FormGroup;
-
   auth = false;
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private alertController: AlertController) {
-    this.formularioLogin = this.fb.group({
-      nombre: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
-    });
+      this.formularioLogin = this.fb.group({
+        nombre: new FormControl('', Validators.required),
+        password: new FormControl('', Validators.required),
+      });
   }
 
   ngOnInit() {
   }
 
   async ingresar() {
-    const f = this.formularioLogin.value;
+
     if (this.formularioLogin.invalid) {
       const alert = await this.alertController.create({
         header: 'Datos incompletos',
@@ -45,7 +44,13 @@ export class LoginPage implements OnInit {
       return;
     }
     else {
-      this.router.navigate(['/home/'+ f.nombre]);
+      let navigationExtras: NavigationExtras = {
+        state: {
+          user: this.formularioLogin.value
+        }
+      };
+      this.router.navigate(['/home'],navigationExtras);
+      
     }
   }
 }
