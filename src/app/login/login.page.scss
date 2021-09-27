@@ -6,8 +6,9 @@ ion-toolbar {
   }
 }
 
-ion-content {
-  --background: #f5f5f3;
+ion-content.background {
+  --background: url(../../assets/img/bgimg.png) no-repeat 100% 100%;
+  
 
   #header {
     display: flex;
@@ -15,14 +16,9 @@ ion-content {
     align-items: center;
 
     h1 {
-      font-weight: 700;
-      font-size: 26px;
-      color: #333333;
-    }
-    h3 {
-      font-weight: 600;
-      font-size: 18px;
-      color: #666666;
+      font-weight: 500;
+      font-size: 22px;
+      color: white;
     }
 
     img {
@@ -34,13 +30,10 @@ ion-content {
   }
 
   #form-login {
-    margin-top: 15px;
-    padding-left: 30px;
-    padding-right: 30px;
-
     .btn-login {
       box-shadow: 1px 8px 8px 0px rgba(0, 0, 0, 0.05);
       --box-shadow: none;
+      --background: #FFAC14;
     }
 
     ion-button {
@@ -48,18 +41,11 @@ ion-content {
       margin-top: 25px;
       height: 48px;
       font-size: 18px;
-      text-transform: initial;
-    }
-
-    ion-buttons {
-      display: flex;
-      flex: column;
-      justify-content: center;
-      margin: 0;
+      text-transform: initial; 
     }
 
     .recoveryLink {
-      color: #0b7be4;
+      color: white;
       text-decoration: underline;
     }
   }

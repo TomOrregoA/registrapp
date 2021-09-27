@@ -49,6 +49,7 @@ export class LoginPage implements OnInit {
           user: this.formularioLogin.value
         }
       };
+      this.formularioLogin.reset();
       this.router.navigate(['/home'],navigationExtras);
       
     }
