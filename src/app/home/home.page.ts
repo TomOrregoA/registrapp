@@ -10,8 +10,22 @@ export class HomePage implements OnInit {
 
   username: any;
   isDisplayImage = false;
+  today =  new Date();
+  options = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }
 
-  constructor(private activeroute: ActivatedRoute, private router: Router) {}
+  constructor(private activeroute: ActivatedRoute, private router: Router) {
+    this.startTime();
+  }
+
+  startTime(){
+    var intervalVar = setInterval(function (){
+      this.today = this.today.toLocaleString('es-CL', this.options);
+      }.bind(this),500)}
 
   ngOnInit() {
     this.activeroute.queryParams.subscribe(params => {

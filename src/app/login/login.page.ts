@@ -22,10 +22,10 @@ export class LoginPage implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private alertController: AlertController) {
-      this.formularioLogin = this.fb.group({
-        nombre: new FormControl('', Validators.required),
-        password: new FormControl('', Validators.required),
-      });
+    this.formularioLogin = this.fb.group({
+      nombre: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
+    });
   }
 
   ngOnInit() {
@@ -50,8 +50,8 @@ export class LoginPage implements OnInit {
         }
       };
       this.formularioLogin.reset();
-      this.router.navigate(['/home'],navigationExtras);
-      
+      this.router.navigate(['/home'], navigationExtras);
+
     }
   }
 }

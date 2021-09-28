@@ -1,24 +1,10 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar>
-    <ion-buttons slot="end">
-      <ion-button color="danger" [routerLink]="['/login']">
-        <ion-icon name="log-out-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-header3></app-header3>
 
 <ion-content class="background">
   <div id="content" class="ion-text-center">
     <h1>Bienvenido <b class="username">{{this.username}}</b></h1>
-    <ion-button expand="block" shape="round" class="btn-login" (click)="displayImage()">Generar QR</ion-button>
+    <p>{{this.today}}</p>
   </div>
-  <ion-card *ngIf="isDisplayImage">
-    <img src="../assets/img/qr.png" alt="">
-    <ion-card-content>
-      Comparte este código QR para que los alumnos lo escaneen.
-    </ion-card-content>
-  </ion-card>
 </ion-content>
 
 <app-footer2></app-footer2>

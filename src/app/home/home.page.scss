@@ -13,7 +13,9 @@ ion-content.background {
     margin-top: 15px;
     padding-left: 30px;
     padding-right: 30px;
-
+    p{
+      color: #fff;
+    }
     .username {
       text-transform: uppercase;
     }
@@ -35,6 +37,7 @@ ion-content.background {
       height: 48px;
       font-size: 18px;
       text-transform: initial;
+      color: white!important;
     }
 
     ion-buttons {

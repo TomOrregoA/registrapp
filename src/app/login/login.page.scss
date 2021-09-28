@@ -1,14 +1,6 @@
-ion-toolbar {
-  --background: #f5f5f3;
-
-  ion-button {
-    text-transform: initial;
-  }
-}
-
 ion-content.background {
   --background: url(../../assets/img/bgimg.png) no-repeat 100% 100%;
-  
+
 
   #header {
     display: flex;
@@ -30,19 +22,6 @@ ion-content.background {
   }
 
   #form-login {
-    .btn-login {
-      box-shadow: 1px 8px 8px 0px rgba(0, 0, 0, 0.05);
-      --box-shadow: none;
-      --background: #FFAC14;
-    }
-
-    ion-button {
-      border-radius: 50px;
-      margin-top: 25px;
-      height: 48px;
-      font-size: 18px;
-      text-transform: initial; 
-    }
 
     .recoveryLink {
       color: white;
