@@ -4,6 +4,12 @@
   <div id="content" class="ion-text-center">
     <h1>Bienvenido <b class="username">{{this.username}}</b></h1>
     <p>{{this.today}}</p>
+    
+    <ion-button expand="block" class="btn btn1" (click)="ingresar()"><ion-icon name="camera" slot="start"></ion-icon>Generar QR</ion-button>
+
+    <ion-button expand="block" class="btn btn2" (click)="ingresar()"><ion-icon name="list" slot="start"></ion-icon>Asistencia</ion-button>
+
+    <ion-button expand="block" class="btn btn3" (click)="ingresar()"><ion-icon name="calendar" slot="start"></ion-icon>Horario</ion-button>
   </div>
 </ion-content>
 
