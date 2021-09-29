@@ -26,11 +26,6 @@ ion-content.background {
       color: #fff;
     }
 
-    .btn-login {
-      box-shadow: 1px 8px 8px 0px rgba(0, 0, 0, 0.05);
-      --box-shadow: none;
-    }
-
     ion-button {
       border-radius: 50px;
       margin-top: 25px;
@@ -38,13 +33,6 @@ ion-content.background {
       font-size: 18px;
       text-transform: initial;
       color: white!important;
-    }
-
-    ion-buttons {
-      display: flex;
-      flex: column;
-      justify-content: center;
-      margin: 0;
     }
 
     .recoveryLink {

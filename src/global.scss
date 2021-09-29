@@ -26,12 +26,36 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 
-.btn-login {
+ion-button {
+
+  &.btn {
     box-shadow: 1px 8px 8px 0px rgba(0, 0, 0, 0.05);
     --box-shadow: none;
-    --background: #FFAC14;
-    margin-top: 25px;
-    height: 48px;
-    font-size: 18px;
-    text-transform: initial;
+    border-radius: 25px;
+
+    &.btn1 {
+      --background: #FFAC14 !important;
+    }
+
+    &.btn1:hover a {
+      --background: #fccb70 !important;
+    }
+
+    &.btn2 {
+      --background: #E35D6A !important;
+    }
+
+    &.btn2:hover a {
+      --background: #d44c5a !important;
+    }
+
+    &.btn3 {
+      --background: #3880FF !important;
+    }
+
+    &.btn3:hover a {
+      --background: #3b77df !important;
+    }
+
   }
+}

@@ -1,6 +1,10 @@
 ion-content.background {
   --background: url(../../assets/img/bgimg.png) no-repeat 100% 100%;
 
+  ion-item {
+    border-radius: 15px;
+    margin-bottom: 15px;
+  }
 
   #header {
     display: flex;
@@ -26,6 +30,24 @@ ion-content.background {
     .recoveryLink {
       color: white;
       text-decoration: underline;
+    }
+
+    ion-label {
+      color: #fff;
+    }
+
+    div {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      border-radius: 15px;
+      margin-bottom: 15px;
+      margin-top: 5px;
+
+      ion-icon {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
     }
   }
 }

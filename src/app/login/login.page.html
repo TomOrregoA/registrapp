@@ -6,17 +6,21 @@
   </div>
 
   <form id="form-login" [formGroup]="formularioLogin">
-    <ion-item>
-      <ion-label position="floating">Nombre de Usuario</ion-label>
-      <ion-input formControlName="nombre"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
+    <ion-label>Usuario</ion-label>
+    <div>
+      <ion-icon name="person"></ion-icon>
+      <ion-input formControlName="nombre" type="text"></ion-input>
+    </div>
+
+    <ion-label position="floating">Contraseña</ion-label>
+    <div>
+      <ion-icon name="key"></ion-icon>
       <ion-input formControlName="password" type="password"></ion-input>
-    </ion-item>
-    <p class="ion-text-end recoveryLink ion-padding-top" [routerLink]="['/password-reset']">¿Ha olvidado su
+    </div>
+
+    <p class="ion-text-end recoveryLink" [routerLink]="['/password-reset']">¿Ha olvidado su
       contraseña?</p>
-    <ion-button expand="block" shape="round" class="btn-login" (click)="ingresar()">Ingresar</ion-button>
+    <ion-button expand="block" shape="round" class="btn btn1" (click)="ingresar()">Ingresar</ion-button>
   </form>
 </ion-content>
 <app-footer1></app-footer1>
