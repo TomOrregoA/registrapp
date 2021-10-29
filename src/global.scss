@@ -85,3 +85,7 @@ ion-button {
     }
   }
 }
+
+ion-content.background{
+  --background: url(assets/img/bgimg.png) no-repeat 100% 100%;
+}
