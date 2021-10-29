@@ -44,7 +44,7 @@ export class LoginPage implements OnInit {
       return;
     }
     else {
-      let navigationExtras: NavigationExtras = {
+      const navigationExtras: NavigationExtras = {
         state: {
           user: this.formularioLogin.value
         }

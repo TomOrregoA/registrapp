@@ -10,28 +10,31 @@ export class HomePage implements OnInit {
 
   username: any;
   isDisplayImage = false;
-  today =  new Date();
+  today = new Date();
   options = {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
     day: 'numeric'
-  }
+  };
 
   constructor(private activeroute: ActivatedRoute, private router: Router) {
     this.startTime();
   }
 
-  startTime(){
-    var intervalVar = setInterval(function (){
+  startTime() {
+    const intervalVar = setInterval(function() {
       this.today = this.today.toLocaleString('es-CL', this.options);
-      }.bind(this),500)}
+    }.bind(this), 500);
+  }
 
   ngOnInit() {
     this.activeroute.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.username = this.router.getCurrentNavigation().extras.state.user.nombre;
-      } else { this.router.navigate(["/login"]) }
+      } else {
+        this.router.navigate(['/login']);
+      }
     });
   }
 
