@@ -1,0 +1,18 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Tomás Orrego",
+      "email": "t.orrego@duoc.cl",
+      "username": "t.orrego",
+      "password": "123456789"
+    },
+    {
+      "id": 2,
+      "name": "Fabián Lopez",
+      "email": "fab.lopezr@duoc.cl",
+      "username": "fab.lopezr",
+      "password": "123456789"
+    }
+  ]
+}

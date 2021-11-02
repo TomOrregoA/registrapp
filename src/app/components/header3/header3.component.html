@@ -2,8 +2,8 @@
   <ion-toolbar class="header-color">
     <h3 slot="start">Inicio</h3>
     <ion-buttons slot="end">
-      <ion-button color="light" [routerLink]="['/login']">
-        <ion-icon name="menu-outline"></ion-icon>
+      <ion-button color="light" [routerLink]="['/login']" (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

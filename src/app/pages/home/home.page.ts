@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { ApiService } from '../../services/apiservice.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -9,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class HomePage implements OnInit {
 
   username: any;
+  name: any;
   isDisplayImage = false;
   today = new Date();
   options = {
@@ -18,7 +21,7 @@ export class HomePage implements OnInit {
     day: 'numeric'
   };
 
-  constructor(private activeroute: ActivatedRoute, private router: Router) {
+  constructor(private api: ApiService, private activeroute: ActivatedRoute, private router: Router) {
     this.startTime();
   }
 
@@ -28,18 +31,30 @@ export class HomePage implements OnInit {
     }.bind(this), 500);
   }
 
+  getUser(userId){
+    this.api.getUsuario(userId).subscribe((res) => {
+      this.name = res.name;
+    }, (error) => {
+      console.log(error);
+    },
+      () => {
+        console.log('getData Completed');
+      });
+  }
+
+  ionViewWillEnter(){
+    this.getUser(1);
+    this.startTime();
+  }
+
   ngOnInit() {
     this.activeroute.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.username = this.router.getCurrentNavigation().extras.state.user.nombre;
       } else {
-        this.router.navigate(['/login']);
+        /* this.router.navigate(['/login']); */
       }
     });
-  }
-
-  displayImage() {
-    this.isDisplayImage = true;
   }
 
 }
