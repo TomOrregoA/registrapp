@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { ApiService } from '../../services/apiservice.service';
+import { AuthApi } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +10,7 @@ import { ApiService } from '../../services/apiservice.service';
 })
 export class HomePage implements OnInit {
 
-  username: any;
+  userId: any;
   name: any;
   isDisplayImage = false;
   today = new Date();
@@ -21,8 +21,30 @@ export class HomePage implements OnInit {
     day: 'numeric'
   };
 
-  constructor(private api: ApiService, private activeroute: ActivatedRoute, private router: Router) {
+  constructor(private authApi: AuthApi, private activeroute: ActivatedRoute, private router: Router) {
     this.startTime();
+  }
+
+  ionViewWillEnter() {
+    const userId = localStorage.getItem('userId');
+    this.getUser(userId);
+    this.startTime();
+  }
+
+  ngOnInit() { }
+
+  getUser(userId) {
+    this.authApi.getUsuario(userId).subscribe({
+      next: (res) => {
+        this.name = res.name;
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {
+        console.log('Get User Data Completed');
+      }
+    });
   }
 
   startTime() {
@@ -30,31 +52,4 @@ export class HomePage implements OnInit {
       this.today = this.today.toLocaleString('es-CL', this.options);
     }.bind(this), 500);
   }
-
-  getUser(userId){
-    this.api.getUsuario(userId).subscribe((res) => {
-      this.name = res.name;
-    }, (error) => {
-      console.log(error);
-    },
-      () => {
-        console.log('getData Completed');
-      });
-  }
-
-  ionViewWillEnter(){
-    this.getUser(1);
-    this.startTime();
-  }
-
-  ngOnInit() {
-    this.activeroute.queryParams.subscribe(params => {
-      if (this.router.getCurrentNavigation().extras.state) {
-        this.username = this.router.getCurrentNavigation().extras.state.user.nombre;
-      } else {
-        /* this.router.navigate(['/login']); */
-      }
-    });
-  }
-
 }

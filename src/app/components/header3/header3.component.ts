@@ -11,6 +11,6 @@ export class Header3Component implements OnInit {
 
   ngOnInit() {}
   logout(){
-    localStorage.setItem('authenticated', '0');
+    localStorage.clear();
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import {
   FormGroup,
   FormControl,
@@ -7,7 +7,7 @@ import {
   FormBuilder
 } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
-import { ApiService } from '../../services/apiservice.service';
+import { AuthApi } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -19,9 +19,10 @@ export class LoginPage implements OnInit {
   formularioLogin: FormGroup;
   auth: any;
   dbData: any;
+  userId: any;
 
   constructor(
-    private api: ApiService,
+    private authApi: AuthApi,
     private router: Router,
     private fb: FormBuilder,
     private alertController: AlertController) {
@@ -32,6 +33,18 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
+    const isAuthenticated = !!(+localStorage.getItem('authenticated'));
+    const usedIdExists = !!(+localStorage.getItem('userId'));
+    if(isAuthenticated && usedIdExists){
+      this.router.navigate(['/home']);
+    }
+  }
+
+  ionViewWillLeave() {
+    this.formularioLogin.reset();
   }
 
   async ingresar() {
@@ -49,41 +62,45 @@ export class LoginPage implements OnInit {
     else {
       const username = this.formularioLogin.value.nombre;
       const password = this.formularioLogin.value.password;
-      localStorage.setItem('authenticated', '1');
-      this.formularioLogin.reset();
-      this.getData(username, password);
-      console.log(this.auth);
-      /* this.router.navigate(['/home']); */
-      /* const alert = await this.alertController.create({
-        header: 'Usuario no existe',
-        message: 'Los datos ingresados no coinciden.',
-        buttons: ['Aceptar']
-      });
 
-      await alert.present();
-      return; */
-    }
-  }
-  getData(username: any, password: any) {
-    let existe = false;
-    this.api.getUsuarios().subscribe((res) => {
-      this.dbData = res;
-      console.log(this.dbData.legth);
-      res.forEach(e => {
-        if (e.username === username && existe === false) {
-          existe = true;
-          console.log('existe');
-          return true;
-        } else {
-          existe = false;
+      this.authApi.getUsuarios().subscribe({
+        next: async (res) => {
+          this.dbData = res;
+          this.auth = this.dbData.find(e => {
+            if (e.username === username) {
+              if (e.password === password) {
+                this.userId = e.id;
+                return true;
+              } else {
+                return false;
+              }
+            }
+            return false;
+          });
+          if (this.auth) {
+            localStorage.setItem('authenticated', '1');
+            localStorage.setItem('userId', this.userId);
+            this.router.navigate(['/home']);
+          } else {
+            const alert = await this.alertController.create({
+              header: 'Datos ingresados incorrectos',
+              message: 'Los datos ingresados no coinciden.',
+              buttons: ['Aceptar']
+            });
+
+            await alert.present();
+            return;
+          }
+        },
+        error: (error) => {
+          console.log(error);
+        },
+        complete: () => {
+          console.log('Get Authorization Completed');
+          this.formularioLogin.reset();
         }
       });
-    }, (error) => {
-      console.log(error);
-    },
-      () => {
-        console.log('getData Completed');
-      });
+    }
   }
 }
 

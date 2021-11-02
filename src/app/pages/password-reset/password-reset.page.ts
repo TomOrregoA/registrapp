@@ -6,7 +6,8 @@ import {
   Validators,
   FormBuilder
 } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
+import { AuthApi } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-password-reset',
@@ -16,22 +17,29 @@ import { AlertController } from '@ionic/angular';
 export class PasswordResetPage implements OnInit {
 
   formularioRestaurar: FormGroup;
+  dbData: any;
+  found: any;
 
   constructor(
+    private navCtrl: NavController,
+    private authApi: AuthApi,
     private router: Router,
     private fb: FormBuilder,
     private alertController: AlertController) {
     this.formularioRestaurar = this.fb.group({
-      nombre: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.required),
     });
   }
 
   ngOnInit() {
   }
 
-  async restaurar() {
-    const f = this.formularioRestaurar.value;
+  ionViewWillLeave() {
+    this.formularioRestaurar.reset();
+  }
 
+  async restaurar() {
+    this.found = false;
     if (this.formularioRestaurar.invalid) {
       const alert = await this.alertController.create({
         header: 'Nombre de usuario incompleto',
@@ -43,14 +51,50 @@ export class PasswordResetPage implements OnInit {
       return;
     }
     else {
-      const alert2 = await this.alertController.create({
-        header: 'Correo Enviado',
-        message: 'Se ha enviado un correo con las instrucciones para restaurar su contraseña.',
-        buttons: ['Aceptar']
+      const email = this.formularioRestaurar.value.email;
+      this.authApi.getUsuarios().subscribe({
+        next: async (res) => {
+          this.dbData = res;
+          this.found = this.dbData.find(e => {
+            if (e.email === email) {
+              return true;
+            }
+            return false;
+          });
+          if (this.found) {
+            const alert1 = await this.alertController.create({
+              header: 'Correo Enviado',
+              message: 'Se ha enviado un correo con las instrucciones para restaurar su contraseña.',
+              buttons: [{
+                text: 'Aceptar',
+                handler: () => {
+                  alert1.dismiss().then(() => {
+                    this.navCtrl.pop();
+                  });
+                }
+              }]
+            });
+            await alert1.present();
+          } else {
+            const alert2 = await this.alertController.create({
+              header: 'El usuario no existe',
+              message: 'El correo ingresado no se encuentra registrado.',
+              buttons: ['Aceptar']
+            });
+
+            await alert2.present();
+            return;
+          }
+        },
+        error: (error) => {
+          console.log(error);
+        },
+        complete: () => {
+          console.log('Get User mail Completed');
+          this.formularioRestaurar.reset();
+        }
       });
 
-      await alert2.present();
-      this.router.navigate(['/login']);
     }
   }
 }
