@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { AuthApi } from '../../services/authentication.service';
+import { ApiService } from '../../services/apiservice.service';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,7 @@ import { AuthApi } from '../../services/authentication.service';
 })
 export class HomePage implements OnInit {
 
-  userId: any;
+  studentId: any;
   name: any;
   isDisplayImage = false;
   today = new Date();
@@ -20,21 +21,28 @@ export class HomePage implements OnInit {
     month: 'long',
     day: 'numeric'
   };
+  asignaturas: any;
+  profesor: any;
+  horario: any;
 
-  constructor(private authApi: AuthApi, private activeroute: ActivatedRoute, private router: Router) {
+  constructor(
+    private authApi: AuthApi,
+    private apiService: ApiService,
+    private activeroute: ActivatedRoute,
+    private router: Router) {
     this.startTime();
   }
 
   ionViewWillEnter() {
-    const userId = localStorage.getItem('userId');
-    this.getUser(userId);
+    const studentId = localStorage.getItem('studentId');
+    this.getStudent(studentId);
     this.startTime();
   }
 
   ngOnInit() { }
 
-  getUser(userId) {
-    this.authApi.getUsuario(userId).subscribe({
+  getStudent(studentId) {
+    this.apiService.getStudent(studentId).subscribe({
       next: (res) => {
         this.name = res.name;
       },
@@ -52,4 +60,14 @@ export class HomePage implements OnInit {
       this.today = this.today.toLocaleString('es-CL', this.options);
     }.bind(this), 500);
   }
+
+/*   mostrarHorario() {
+    this.apiService.getAsignaturas().subscribe({
+      next: (res) => {
+        this.asignaturas = res;
+      },
+      error: (error) => console.log(error),
+      complete: () => {}
+    });
+  } */
 }

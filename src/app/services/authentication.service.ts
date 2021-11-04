@@ -16,18 +16,18 @@ export class AuthApi {
     })
   };
 
-  apiURL = 'http://192.168.1.131:3000';
+  apiURL = 'http://localhost:3000';
 
   constructor(private http: HttpClient) { }
 
-  getUsuarios(): Observable<any> {
-    return this.http.get(this.apiURL + '/users/').pipe(
+  getStudents(): Observable<any> {
+    return this.http.get(this.apiURL + '/student/').pipe(
       retry(3)
     );
   }
 
-  getUsuario(userId): Observable<any> {
-    return this.http.get(this.apiURL + '/users/' + userId).pipe(
+  getStudent(userId): Observable<any> {
+    return this.http.get(this.apiURL + '/student/' + userId).pipe(
       retry(3)
     );
   }

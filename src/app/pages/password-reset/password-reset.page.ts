@@ -52,7 +52,7 @@ export class PasswordResetPage implements OnInit {
     }
     else {
       const email = this.formularioRestaurar.value.email;
-      this.authApi.getUsuarios().subscribe({
+      this.authApi.getStudents().subscribe({
         next: async (res) => {
           this.dbData = res;
           this.found = this.dbData.find(e => {

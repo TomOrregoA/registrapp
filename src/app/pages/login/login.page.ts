@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
   formularioLogin: FormGroup;
   auth: any;
   dbData: any;
-  userId: any;
+  studentId: any;
 
   constructor(
     private authApi: AuthApi,
@@ -37,8 +37,8 @@ export class LoginPage implements OnInit {
 
   ionViewWillEnter() {
     const isAuthenticated = !!(+localStorage.getItem('authenticated'));
-    const usedIdExists = !!(+localStorage.getItem('userId'));
-    if(isAuthenticated && usedIdExists){
+    const usedIdExists = !!(+localStorage.getItem('studentId'));
+    if (isAuthenticated && usedIdExists) {
       this.router.navigate(['/home']);
     }
   }
@@ -63,13 +63,14 @@ export class LoginPage implements OnInit {
       const username = this.formularioLogin.value.nombre;
       const password = this.formularioLogin.value.password;
 
-      this.authApi.getUsuarios().subscribe({
-        next: async (res) => {
+      this.authApi.getStudents().subscribe({
+        next: (res) => {
           this.dbData = res;
           this.auth = this.dbData.find(e => {
             if (e.username === username) {
               if (e.password === password) {
-                this.userId = e.id;
+                this.studentId = e.id;
+                console.log(this.studentId);
                 return true;
               } else {
                 return false;
@@ -77,9 +78,16 @@ export class LoginPage implements OnInit {
             }
             return false;
           });
+        },
+        error: (error) => {
+          console.log(error);
+        },
+        complete: async () => {
+          console.log('Get Authorization Completed');
+          this.formularioLogin.reset();
           if (this.auth) {
             localStorage.setItem('authenticated', '1');
-            localStorage.setItem('userId', this.userId);
+            localStorage.setItem('studentId', this.studentId);
             this.router.navigate(['/home']);
           } else {
             const alert = await this.alertController.create({
@@ -91,13 +99,6 @@ export class LoginPage implements OnInit {
             await alert.present();
             return;
           }
-        },
-        error: (error) => {
-          console.log(error);
-        },
-        complete: () => {
-          console.log('Get Authorization Completed');
-          this.formularioLogin.reset();
         }
       });
     }

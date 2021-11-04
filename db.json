@@ -1,32 +1,105 @@
 {
-  "users": [
+  "student": [
     {
       "id": 1,
       "name": "Tomás Orrego",
       "email": "t.orrego@duocuc.cl",
       "username": "t.orrego",
-      "password": "123456789"
+      "password": "123"
     },
     {
       "id": 2,
       "name": "Fabián Lopez",
       "email": "fab.lopezr@duocuc.cl",
       "username": "fab.lopezr",
-      "password": "123456789"
+      "password": "123"
     },
     {
       "id": 3,
       "name": "Juan Pérez",
       "email": "j.perez@duocuc.cl",
       "username": "j.perez",
-      "password": "123456789"
+      "password": "123"
     },
     {
       "id": 4,
       "name": "Ana Maidana",
       "email": "a.maidana@duocuc.cl",
       "username": "a.maidana",
-      "password": "123456789"
+      "password": "123"
+    }
+  ],
+  "teacher": [
+    {
+      "id": "1",
+      "name": "Nancy Bernales",
+      "email": "n.bernales@profesor.duocuc.cl",
+      "username": "n.bernales",
+      "password": "123"
+    },
+    {
+      "id": "2",
+      "name": "David Larrondo",
+      "email": "d.larrondo@profesor.duocuc.cl",
+      "username": "d.larrondo",
+      "password": "123"
+    },
+    {
+      "id": "3",
+      "name": "Sebastián Saavedra",
+      "email": "s.saavedra@profesor.duocuc.cl",
+      "username": "s.saavedra",
+      "password": "123"
+    },
+    {
+      "id": "4",
+      "name": "Katherinne Mondaca",
+      "email": "k.mondaca@profesor.duocuc.cl",
+      "username": "k.mondaca",
+      "password": "123"
+    },
+    {
+      "id": "5",
+      "name": "Carlos Gaggero",
+      "email": "c.gaggero@profesor.duocuc.cl",
+      "username": "c.gaggero",
+      "password": "123"
+    }
+
+  ],
+  "course": [
+    {
+      "id": "1",
+      "coursename": "Programación de Aplicaciones Móviles",
+      "code": "PGY4121-001V",
+      "schedule": "Lun. 19:16 - Mar. 21:31",
+      "teacherId": "1"
+    },
+    {
+      "id": "2",
+      "coursename": "Calidad de Software",
+      "code": "CSY4111-001V",
+      "schedule": "Lun. 22:16 - Vi. 20:46",
+      "teacherId": "3"
+    },
+    {
+      "id": "3",
+      "coursename": "Arquitectura",
+      "code": "ASY4131-001V",
+      "schedule": "Mar. 19:16 - Mie. 22:16",
+      "teacherId": "2"
+    },
+    {
+      "id": "4",
+      "coursename": "Estadística Descriptiva",
+      "code": "MAT4140-001V",
+      "schedule": "Mie. 20:46 - Jue. 19:16"
+    },
+    {
+      "id": "5",
+      "coursename": "Ética para el Trabajo",
+      "code": "EAY4470-001V",
+      "schedule": "Jue. 20:46"
     }
   ]
 }
