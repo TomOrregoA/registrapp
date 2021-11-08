@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { AuthApi } from '../../services/authentication.service';
 import { ApiService } from '../../services/apiservice.service';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { AlertController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -26,10 +28,13 @@ export class HomePage implements OnInit {
   horario: any;
 
   constructor(
+    private navCtrl: NavController,
+    private alertCtrl: AlertController,
     private authApi: AuthApi,
     private apiService: ApiService,
     private activeroute: ActivatedRoute,
-    private router: Router) {
+    private router: Router,
+    private barcodeScanner: BarcodeScanner) {
     this.startTime();
   }
 
@@ -55,19 +60,30 @@ export class HomePage implements OnInit {
     });
   }
 
+  scan() {
+    this.barcodeScanner.scan().then(barcodeData => {
+      console.log('Barcode data', barcodeData);
+      if (!barcodeData.cancelled) {
+      }
+    }).catch(err => {
+      console.log('Error', err);
+    });
+  }
+
+
   startTime() {
     const intervalVar = setInterval(function() {
       this.today = this.today.toLocaleString('es-CL', this.options);
     }.bind(this), 500);
   }
 
-/*   mostrarHorario() {
-    this.apiService.getAsignaturas().subscribe({
-      next: (res) => {
-        this.asignaturas = res;
-      },
-      error: (error) => console.log(error),
-      complete: () => {}
-    });
-  } */
+  /*   mostrarHorario() {
+      this.apiService.getAsignaturas().subscribe({
+        next: (res) => {
+          this.asignaturas = res;
+        },
+        error: (error) => console.log(error),
+        complete: () => {}
+      });
+    } */
 }

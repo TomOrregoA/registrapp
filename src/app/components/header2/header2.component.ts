@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-header2',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Header2Component implements OnInit {
 
-  constructor() { }
+  constructor(private navCtrl: NavController) { }
 
   ngOnInit() {}
 
+  return(){
+    this.navCtrl.navigateRoot('login');
+  }
 }

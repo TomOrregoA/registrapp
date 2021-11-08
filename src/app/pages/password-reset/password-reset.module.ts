@@ -7,8 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { PasswordResetPageRoutingModule } from './password-reset-routing.module';
 
 import { PasswordResetPage } from './password-reset.page';
-import { Footer1Component } from '../../components/footer1/footer1.component';
-import { Header2Component } from '../../components/header2/header2.component';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   imports: [
@@ -16,11 +15,9 @@ import { Header2Component } from '../../components/header2/header2.component';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    PasswordResetPageRoutingModule
+    PasswordResetPageRoutingModule,
+    ComponentsModule
   ],
-  declarations: [
-    PasswordResetPage,
-    Header2Component,
-    Footer1Component]
+  declarations: [PasswordResetPage]
 })
 export class PasswordResetPageModule {}
