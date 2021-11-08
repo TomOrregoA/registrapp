@@ -1,5 +1,7 @@
 {
   "name": "registrapp",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }
