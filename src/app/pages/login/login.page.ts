@@ -15,7 +15,7 @@ import { AuthApi } from '../../services/authentication.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
+  otpSend = false;
   formularioLogin: FormGroup;
   auth: any;
   dbData: any;

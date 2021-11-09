@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { retry, catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-/* github api token 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 */
 @Injectable({
   providedIn: 'root'
 })
@@ -16,7 +15,7 @@ export class ApiService {
     })
   };
 
-  apiURL = 'http://localhost:3000';
+  apiURL = 'https://my-json-server.typicode.com/TomOrregoA/mockApi/';
 
   constructor(private http: HttpClient) { }
 

@@ -70,6 +70,9 @@ export class HomePage implements OnInit {
     });
   }
 
+  error() {
+    this.router.navigate(['**']);
+  }
 
   startTime() {
     const intervalVar = setInterval(function() {

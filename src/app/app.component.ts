@@ -1,6 +1,6 @@
 /* eslint-disable @angular-eslint/use-lifecycle-interface */
 import { Component } from '@angular/core';
-import { Storage } from '@ionic/storage-angular';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +11,5 @@ export class AppComponent {
   constructor(private storage: Storage) {
   }
   async ngOnInit(){
-    await this.storage.create();
   }
 }

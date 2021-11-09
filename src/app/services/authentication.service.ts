@@ -16,7 +16,7 @@ export class AuthApi {
     })
   };
 
-  apiURL = 'http://localhost:3000';
+  apiURL = 'https://my-json-server.typicode.com/TomOrregoA/mockApi/';
 
   constructor(private http: HttpClient) { }
 
