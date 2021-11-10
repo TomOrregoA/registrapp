@@ -16,10 +16,11 @@ export class DataStorageService {
   async saveReg(fm: string, tx: string) {
     const newReg = new Register(fm, tx);
     this.registers.unshift(newReg);
+    console.log(this.registers);
     this.storage.set('registers', this.registers);
-    console.log( await this.storage.length());
   }
   async loadReg() {
+    this.storage.clear();
     this.registers = (await this.storage.get('registers')) || [];
   }
 }
