@@ -57,6 +57,14 @@ ion-button {
       --background: #3b77df !important;
     }
 
+    &.btn4 {
+      --background: #f52c09 !important;
+    }
+
+    &.btn4:hover a {
+      --background: #fa583b !important;
+    }
+
   }
 }
 
@@ -89,3 +97,5 @@ ion-button {
 ion-content.background{
   --background: url(assets/img/bgimg.png) no-repeat 100% 100%;
 }
+
+

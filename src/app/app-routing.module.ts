@@ -29,7 +29,11 @@ const routes: Routes = [
   {
     path: '**',
     loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
-  }
+  },
+  {
+    path: 'asistencia',
+    loadChildren: () => import('./pages/asistencia/asistencia.module').then( m => m.AsistenciaPageModule)
+  },
 ];
 
 @NgModule({
