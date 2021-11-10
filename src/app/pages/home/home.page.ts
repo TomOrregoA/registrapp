@@ -5,6 +5,7 @@ import { AuthApi } from '../../services/authentication.service';
 import { ApiService } from '../../services/apiservice.service';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { AlertController, NavController } from '@ionic/angular';
+import { DataStorageService } from '../../services/data-storage.service';
 
 @Component({
   selector: 'app-home',
@@ -28,6 +29,7 @@ export class HomePage implements OnInit {
   horario: any;
 
   constructor(
+    private dataStorage: DataStorageService,
     private navCtrl: NavController,
     private alertCtrl: AlertController,
     private authApi: AuthApi,
@@ -61,12 +63,14 @@ export class HomePage implements OnInit {
   }
 
   scan() {
-    this.barcodeScanner.scan().then(barcodeData => {
-      console.log('Barcode data', barcodeData);
-      if (!barcodeData.cancelled) {
+    this.barcodeScanner.scan().then(bcElement => {
+      console.log('Info:', bcElement);
+      if(!bcElement.cancelled) {
+        this.dataStorage.saveReg(bcElement.format, bcElement.text);
       }
     }).catch(err => {
       console.log('Error', err);
+      this.dataStorage.saveReg('Test-Scan', 'This is a text Scan');
     });
   }
 
