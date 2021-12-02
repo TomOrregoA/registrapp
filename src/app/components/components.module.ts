@@ -7,6 +7,7 @@ import { Footer2Component } from './footer2/footer2.component';
 import { Header1Component } from './header1/header1.component';
 import { Header2Component } from './header2/header2.component';
 import { Header3Component } from './header3/header3.component';
+import { Header4Component } from './header4/header4.component';
 
 
 @NgModule({
@@ -15,14 +16,16 @@ import { Header3Component } from './header3/header3.component';
     Footer2Component,
     Header1Component,
     Header2Component,
-    Header3Component
+    Header3Component,
+    Header4Component
   ],
   exports: [
     Footer1Component,
     Footer2Component,
     Header1Component,
     Header2Component,
-    Header3Component
+    Header3Component,
+    Header4Component
   ],
   imports: [
     CommonModule,

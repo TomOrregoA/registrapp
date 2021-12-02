@@ -6,7 +6,8 @@ import { AuthApi } from '../../services/authentication.service';
 import { ApiService } from '../../services/apiservice.service';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { AlertController, NavController, Platform } from '@ionic/angular';
-import { DataStorageService, Register } from '../../services/data-storage.service';
+import { DataStorageService } from '../../services/data-storage.service';
+import { Register, Scan } from '../../interfaces/register';
 import { ModalController } from '@ionic/angular';
 import { AsistenciaPage } from '../asistencia/asistencia.page';
 
@@ -31,12 +32,14 @@ export class HomePage implements OnInit {
   profesor: any;
 
   registers: Register[] = [];
+  scans: Scan[] = [];
 
   newReg: Register = <Register>{};
+  newScan: Scan = <Scan>{};
 
   constructor(
     private platform: Platform,
-    public modalController: ModalController,
+    private modalController: ModalController,
     private dataStorage: DataStorageService,
     private navCtrl: NavController,
     private alertCtrl: AlertController,
@@ -46,8 +49,8 @@ export class HomePage implements OnInit {
     private router: Router,
     private barcodeScanner: BarcodeScanner) {
     this.startTime();
-    this.platform.ready().then(()=> {
-      this.loadRegisters();
+    this.platform.ready().then(() => {
+      this.loadRegs();
     });
   }
 
@@ -74,21 +77,36 @@ export class HomePage implements OnInit {
   }
 
   // Create
-  addReg(format: string, text: string) {
-    this.newReg.fm = format;
-    this.newReg.tx = text;
-    this.newReg.date = this.today;
+  addScan(format: string, content: string) {
+    this.newScan.format = format;
+    this.newScan.content = content;
 
-    this.dataStorage.addReg(this.newReg).then(register => {
+    const e = JSON.parse(this.newScan.content);
+    this.newReg.idAsignatura = e.idAsignatura;
+    this.newReg.seccion = e.seccion;
+    this.newReg.asignatura = e.asignatura;
+    this.newReg.docente = e.docente;
+    this.newReg.correo = e.correo;
+    this.newReg.date = this.today;
+    console.group('Registro');
+    console.log(e.idAsignatura);
+    console.log(e.seccion);
+    console.log(e.asignatura);
+    console.log(e.docente);
+    console.log(e.correo);
+    console.groupEnd();
+
+    this.dataStorage.addScan(this.newReg).then(reg => {
       this.newReg = <Register>{};
-      this.loadRegisters();
+      this.loadRegs();
     });
   }
 
   // Read
-  loadRegisters(){
-    this.dataStorage.getRegs().then(registers => {
-      this.registers = registers;
+
+  loadRegs() {
+    this.dataStorage.getRegs().then(regs => {
+      this.registers = regs;
       console.log(this.registers);
     });
   }
@@ -97,28 +115,34 @@ export class HomePage implements OnInit {
 
   scan() {
     this.barcodeScanner.scan().then(bcElement => {
-      console.log('Info:', bcElement);
       if (!bcElement.cancelled) {
-        this.addReg(bcElement.format, bcElement.text);
+        this.addScan(bcElement.format, bcElement.text);
       }
     }).catch(err => {
       console.log('Error', err);
-      this.addReg('Test-Scan', 'This is a text Scan');
+      /* this.addScan('Test-Scan',
+        '{"idAsignatura": "XXX0000", "seccion": "00", "asignatura": "Prueba", "docente": "profesor", "correo": "correo@prueba.cl"}'); */
+      this.showError(err);
     });
   }
+
+  async showError(err) {
+    const alert = await this.alertCtrl.create({
+      backdropDismiss: false,
+      header: 'Error al Escanear el código.',
+      message: err,
+      buttons: [{
+        text: 'Aceptar'
+      }]
+    });
+    await alert.present();
+  }
+
 
   // Redirige hacia la página 404 en caso de clickear horario
 
   error() {
     this.router.navigate(['**']);
-  }
-
-  // Muestra la fecha en el home
-
-  startTime() {
-    const intervalVar = setInterval(function() {
-      this.today = this.today.toLocaleString('es-CL', this.options);
-    }.bind(this), 500);
   }
 
   /* mostrarHorario() {
@@ -141,8 +165,18 @@ export class HomePage implements OnInit {
     return await modal.present();
   }
 
+  // Borrar el storage
+
   delete() {
     this.dataStorage.wipe();
+  }
+
+  // Muestra la fecha en el home
+
+  startTime() {
+    const intervalVar = setInterval(function() {
+      this.today = this.today.toLocaleString('es-CL', this.options);
+    }.bind(this), 500);
   }
 }
 

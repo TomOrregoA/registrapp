@@ -10,3 +10,42 @@
     align-self: center;
   }
 }
+
+ion-content ion-card {
+  width: 80%;
+  margin: 5% auto;
+
+  ion-card-header {
+    --background: #00316D!important;
+
+    ion-card-title{
+      color: #FFF!important;
+    }
+
+    ion-card-subtitle {
+      color: #FFAC14!important;
+    }
+  }
+
+  ion-card-content{
+    margin-top: 15px;
+  }
+
+  ion-item {
+    .icon {
+      display: inline-block;
+      font-size: 20px;
+      color: #FFAC14;
+      vertical-align: middle;
+    }
+
+    .text {
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 15px;
+    }
+  }
+}
+
+
+

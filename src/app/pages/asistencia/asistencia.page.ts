@@ -1,7 +1,8 @@
 /* eslint-disable quote-props */
 import { Component, OnInit } from '@angular/core';
 import { ModalController, Platform } from '@ionic/angular';
-import { DataStorageService, Register } from '../../services/data-storage.service';
+import { DataStorageService } from '../../services/data-storage.service';
+import { Register, Scan } from '../../interfaces/register';
 
 @Component({
   selector: 'app-asistencia',
@@ -11,6 +12,7 @@ import { DataStorageService, Register } from '../../services/data-storage.servic
 export class AsistenciaPage implements OnInit {
 
   registers: Register[] = [];
+  scans: Scan[] = [];
 
   constructor(
     private platform: Platform,
@@ -18,22 +20,16 @@ export class AsistenciaPage implements OnInit {
     private dataStorage: DataStorageService
   ) {
     this.platform.ready().then(()=> {
-      this.loadRegisters();
+      this.loadRegs();
     });
   }
 
-  loadRegisters(){
-    this.dataStorage.getRegs().then(registers => {
-      this.registers = registers;
-      console.log(this.registers[0].date);
+  loadRegs(){
+    this.dataStorage.getRegs().then( regs => {
+      this.registers = regs;
     });
   }
 
   ngOnInit() {
-
-  }
-
-  dismiss() {
-    this.modalController.dismiss();
   }
 }

@@ -1,12 +1,8 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { Scan, Register } from '../interfaces/register';
 
-export interface Register {
-  fm: string;
-  tx: string;
-  date: Date;
-}
 
 const ITEMS_KEY = 'my-items';
 
@@ -16,18 +12,16 @@ const ITEMS_KEY = 'my-items';
 export class DataStorageService {
 
   constructor(private storage: Storage) {
-
   }
 
   // Create
-  addReg(register: Register): Promise<any> {
-    return this.storage.get(ITEMS_KEY).then((registers: Register[]) => {
-      if (registers){
-        registers.push(register);
-        return this.storage.set(ITEMS_KEY, registers);
-
+  addScan(reg: Register): Promise<any> {
+    return this.storage.get(ITEMS_KEY).then((regs: Register[]) => {
+      if (regs){
+        regs.push(reg);
+        return this.storage.set(ITEMS_KEY, regs);
       } else {
-        return this.storage.set(ITEMS_KEY, [register]);
+        return this.storage.set(ITEMS_KEY, [reg]);
       }
     });
   }
@@ -36,6 +30,27 @@ export class DataStorageService {
   getRegs(): Promise<Register[]> {
     /* this.storage.clear(); */
     return this.storage.get(ITEMS_KEY);
+  }
+
+  /* addReg(scan: Scan): Promise<any> {
+    return this.storage.get(ITEMS_KEY).then((scans: Scan[]) => {
+      if (scans){
+        scans.push(scan);
+        return this.storage.set(ITEMS_KEY, scans);
+      } else {
+        return this.storage.set(ITEMS_KEY, [scans]);
+      }
+    });
+  } */
+
+  // Read
+  /* getRegs(): Promise<Scan[]> {
+    return this.storage.get(ITEMS_KEY);
+  } */
+
+  // Wipe Storage
+  wipe(){
+    this.storage.clear();
   }
 
 /*   //  Update
@@ -73,10 +88,7 @@ export class DataStorageService {
       return this.storage.set(ITEMS_KEY, toKeep);
     });
   } */
-  // Wipe Storage
-  wipe(){
-    this.storage.clear();
-  }
+
 }
 
 
