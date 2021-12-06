@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Scan, Register } from '../interfaces/register';
 
-
 const ITEMS_KEY = 'my-items';
 
 @Injectable({
@@ -11,13 +10,14 @@ const ITEMS_KEY = 'my-items';
 })
 export class DataStorageService {
 
-  constructor(private storage: Storage) {
+  constructor(
+    private storage: Storage) {
   }
 
   // Create
   addScan(reg: Register): Promise<any> {
     return this.storage.get(ITEMS_KEY).then((regs: Register[]) => {
-      if (regs){
+      if (regs) {
         regs.push(reg);
         return this.storage.set(ITEMS_KEY, regs);
       } else {
@@ -49,46 +49,43 @@ export class DataStorageService {
   } */
 
   // Wipe Storage
-  wipe(){
+  wipe() {
     this.storage.clear();
   }
 
-/*   //  Update
-  updateReg(register: Register){
-    return this.storage.get(ITEMS_KEY).then((registers: Register[]) => {
-      if(!registers || registers.length === 0){
-        return null;
-      }
-      const newRegs: Register[] = [];
-
-      for(const i of registers) {
-        if(i.id === register.id) {
-          newRegs.push(register);
-        } else {
-          newRegs.push(i);
+  /*   //  Update
+    updateReg(register: Register){
+      return this.storage.get(ITEMS_KEY).then((registers: Register[]) => {
+        if(!registers || registers.length === 0){
+          return null;
         }
-      }
-    });
-  }
+        const newRegs: Register[] = [];
 
-  // Delete
-  deleteItem(id: number): Promise<Register> {
-    return this.storage.get(ITEMS_KEY).then((registers: Register[]) => {
-      if(!registers || registers.length === 0 ){
-        return null;
-      }
-
-      const toKeep: Register[] = [];
-
-      for (const i of registers) {
-        if(i.id !== id){
-          toKeep.push(i);
+        for(const i of registers) {
+          if(i.id === register.id) {
+            newRegs.push(register);
+          } else {
+            newRegs.push(i);
+          }
         }
-      }
-      return this.storage.set(ITEMS_KEY, toKeep);
-    });
-  } */
+      });
+    }
 
+    // Delete
+    deleteItem(id: number): Promise<Register> {
+      return this.storage.get(ITEMS_KEY).then((registers: Register[]) => {
+        if(!registers || registers.length === 0 ){
+          return null;
+        }
+
+        const toKeep: Register[] = [];
+
+        for (const i of registers) {
+          if(i.id !== id){
+            toKeep.push(i);
+          }
+        }
+        return this.storage.set(ITEMS_KEY, toKeep);
+      });
+    } */
 }
-
-

@@ -20,7 +20,11 @@ export class HomePage implements OnInit {
 
   studentId: any;
   name: any;
+  email: any;
   isDisplayImage = false;
+
+  mailFormat = null;
+
   today = new Date();
   options = {
     weekday: 'long',
@@ -37,6 +41,7 @@ export class HomePage implements OnInit {
   newReg: Register = <Register>{};
   newScan: Scan = <Scan>{};
 
+
   constructor(
     private platform: Platform,
     private modalController: ModalController,
@@ -48,6 +53,7 @@ export class HomePage implements OnInit {
     private activeroute: ActivatedRoute,
     private router: Router,
     private barcodeScanner: BarcodeScanner) {
+
     this.startTime();
     this.platform.ready().then(() => {
       this.loadRegs();
@@ -88,13 +94,13 @@ export class HomePage implements OnInit {
     this.newReg.docente = e.docente;
     this.newReg.correo = e.correo;
     this.newReg.date = this.today;
-    console.group('Registro');
-    console.log(e.idAsignatura);
-    console.log(e.seccion);
-    console.log(e.asignatura);
-    console.log(e.docente);
-    console.log(e.correo);
-    console.groupEnd();
+
+    this.mailFormat = `mailto:${this.newReg.correo}?subject=Nuevo%20Registro%20en%20RegistrAPP&body=`+
+    `%20Id de Asignatura:%20 ${this.newReg.idAsignatura}\n`+
+    `%20Sección:%20 ${this.newReg.seccion}\n`+
+    `%20Asignatura:%20 ${this.newReg.asignatura}\n`+
+    `%20Docente:%20 ${this.newReg.docente}\n`+
+    `%20Fecha de Registro:%20 ${this.newReg.date}`;
 
     this.dataStorage.addScan(this.newReg).then(reg => {
       this.newReg = <Register>{};
@@ -145,16 +151,6 @@ export class HomePage implements OnInit {
     this.router.navigate(['**']);
   }
 
-  /* mostrarHorario() {
-    this.apiService.getAsignaturas().subscribe({
-      next: (res) => {
-        this.asignaturas = res;
-      },
-      error: (error) => console.log(error),
-      complete: () => { }
-    });
-  } */
-
   // Mostrar el modal
 
   async mostrarAsistencia() {
@@ -169,6 +165,27 @@ export class HomePage implements OnInit {
 
   delete() {
     this.dataStorage.wipe();
+    this.mailFormat = null;
+  }
+
+  async sendMail() {
+
+    if (this.mailFormat) {
+      const registro = document.createElement('a');
+      registro.setAttribute('href', this.mailFormat);
+      registro.click();
+    }
+    else {
+      const alert = await this.alertCtrl.create({
+        backdropDismiss: false,
+        header: 'Error al enviar registro.',
+        message: 'Debe escanear el código compartido por su docente antes de enviar el registro por correo',
+        buttons: [{
+          text: 'Aceptar'
+        }]
+      });
+      await alert.present();
+    }
   }
 
   // Muestra la fecha en el home

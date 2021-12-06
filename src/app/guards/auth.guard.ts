@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanLoad, Route, UrlSegment, UrlTree, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanLoad, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +19,7 @@ export class AuthGuard implements CanLoad {
         url = navigation.extractedUrl.toString();
       }
 
-      this.router.navigate(['/'], { queryParams: { returnto: url }});
+      this.router.navigate(['/'], { queryParams: { returnto: url } });
       return false;
     }
   }

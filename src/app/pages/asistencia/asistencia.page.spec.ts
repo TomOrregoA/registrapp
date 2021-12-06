@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
-
 import { AsistenciaPage } from './asistencia.page';
+import { IonicStorageModule } from '@ionic/storage';
 
 describe('AsistenciaPage', () => {
   let component: AsistenciaPage;
@@ -10,7 +10,7 @@ describe('AsistenciaPage', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ AsistenciaPage ],
-      imports: [IonicModule.forRoot()]
+      imports: [IonicModule.forRoot(), IonicStorageModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AsistenciaPage);

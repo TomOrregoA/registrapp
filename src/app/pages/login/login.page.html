@@ -6,19 +6,19 @@
   </div>
 
   <form id="pageForm" [formGroup]="formularioLogin">
-    <ion-label>Usuario</ion-label>
+    <ion-label id="user">Usuario</ion-label>
     <div>
       <ion-icon name="person"></ion-icon>
       <ion-input formControlName="nombre" type="text"></ion-input>
     </div>
 
-    <ion-label position="floating">Contraseña</ion-label>
+    <ion-label position="floating" id="password">Contraseña</ion-label>
     <div>
       <ion-icon name="key"></ion-icon>
       <ion-input formControlName="password" type="password"></ion-input>
     </div>
 
-    <p class="ion-text-end pageLink" [routerLink]="['/password-reset']">¿Ha olvidado su
+    <p class="ion-text-end pageLink recovery-btn" [routerLink]="['/password-reset']">¿Ha olvidado su
       contraseña?</p>
     <ion-button expand="block" shape="round" class="btn btn1" (click)="ingresar()">Ingresar</ion-button>
   </form>

@@ -17,7 +17,9 @@ import { ComponentsModule } from '../../components/components.module';
     ReactiveFormsModule,
     IonicModule,
     LoginPageRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [    LoginPage]
 })
